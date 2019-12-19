@@ -1,0 +1,45 @@
+import axios from 'axios';
+
+export const getUsers = () => {
+  return {
+    type: 'GET_USERS',
+    payload: axios
+      .get('https://ibukost.herokuapp.com/user')
+      .then()
+      .catch(err => console.log(err)),
+  };
+};
+
+export const getAUser = id => {
+  return {
+    type: 'GET_A_USER',
+    payload: axios
+      .get(`https://ibukost.herokuapp.com/user/show/${id}`)
+      .then()
+      .catch(err => console.log(err)),
+  };
+};
+
+export const updateUser = (id, data) => {
+  return {
+    type: 'UPDATE_USER',
+    payload: axios
+      .patch(`https://ibukost.herokuapp.com/user/${id}`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then()
+      .catch(err => console.log(err)),
+  };
+};
+
+export const deleteUser = id => {
+  return {
+    type: 'DELETE_USER',
+    payload: axios
+      .delete(`https://ibukost.herokuapp.com/user/${id}`)
+      .then()
+      .catch(err => console.log(err)),
+  };
+};
