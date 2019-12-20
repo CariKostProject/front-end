@@ -44,12 +44,12 @@ class Register extends Component {
   handleSubmit = async () => {
     // this.setState({isLoading: true});
     const {formData, device_id} = this.state;
-    console.log(formData);
+    //console.log(formData);
     await this.props
       .dispatch(registerUser(formData, device_id))
       .then(async res => {
         if (res.action.payload.data.status === 400) {
-          console.log(res);
+          //console.log(res);
           this.setState({
             formData: {
               fullname: '',

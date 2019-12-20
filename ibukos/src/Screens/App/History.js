@@ -11,6 +11,7 @@ import {
   Right,
   Badge,
   Row,
+  AsyncStorage,
 } from 'native-base';
 
 import axios from 'axios';
@@ -18,7 +19,8 @@ export default class History extends React.Component {
   constructor() {
     super();
     this.state = {
-      Payment: [],
+      History: [],
+
       refresh: false,
     };
   }
@@ -34,8 +36,9 @@ export default class History extends React.Component {
 
   getHistory = () => {
     this.setState({load: true});
+
     axios
-      .get('https://ibukost.herokuapp.com/booking/history')
+      .get('https://ibukost.herokuapp.com/booking/history/')
       .then(result => {
         this.setState({Payment: result.data.result});
         this.setState({refresh: false});
@@ -46,6 +49,9 @@ export default class History extends React.Component {
   };
 
   async componentDidMount() {
+    // const user_id =  AsyncStorage.getItem('user_id');
+    //  console.warn('USER ID BREEEEEEEEE: ');
+
     await this.getHistory();
   }
 
@@ -70,7 +76,9 @@ export default class History extends React.Component {
                   <ListItem>
                     <Row>
                       <Left>
-                        <Text>Pembayaran Kost {item.item.labelName}</Text>
+                        <Text>
+                          Pembayaran untuk Kostnya {item.item.labelName}
+                        </Text>
                       </Left>
                       <Right>
                         <Text>{item.item.status}</Text>

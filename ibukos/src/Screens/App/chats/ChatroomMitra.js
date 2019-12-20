@@ -39,13 +39,13 @@ export default class Chatroom extends Component {
   }
   async componentWillMount() {
     const id = await AsyncStorage.getItem('user_id');
-    console.log(id);
+    // console.log(id);
     this.setState({
       myuid: id,
       myname: await AsyncStorage.getItem('name'),
       avatar: await AsyncStorage.getItem('avatar'),
     });
-    console.log(this.state);
+    //console.log(this.state);
   }
   async componentDidMount() {
     const id = await AsyncStorage.getItem('user_id');
@@ -126,8 +126,8 @@ export default class Chatroom extends Component {
   };
 
   render() {
-    console.log(this.state.messages);
-    console.log(this.props.navigation.getParam('device_id'));
+    // console.log(this.state.messages);
+    // console.log(this.props.navigation.getParam('device_id'));
     return (
       <GiftedChat
         text={this.state.txtMsg}

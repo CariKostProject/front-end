@@ -25,14 +25,14 @@ class KosDetail extends Component {
   }
 
   componentDidMount = async () => {
-    console.log(this.state.kosDetail);
+    // console.log(this.state.kosDetail);
     this.setState({image: this.state.kosDetail.image.split(',')});
-    console.log(this.state.kosDetail.image.split(','));
+    // console.log(this.state.kosDetail.image.split(','));
 
     const token = await AsyncStorage.getItem('tokenUser');
     const decode = jwt(token);
     this.setState({id: decode['id']});
-    console.log(decode['id']);
+    //console.log(decode['id']);
   };
 
   _renderItem({item, index}) {

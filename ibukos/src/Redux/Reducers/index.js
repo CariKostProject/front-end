@@ -5,6 +5,7 @@ import regions from './regions';
 import user from './user';
 import partner from './partner';
 import rooms from './room';
+import history from './history';
 
 const appReducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   user,
   partner,
   rooms,
+  history,
 });
 
 const rootReducer = (state, action) => {

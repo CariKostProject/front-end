@@ -32,10 +32,10 @@ class ProductMap extends Component {
     };
   }
   componentDidMount = () => {
-    console.log(this.props.navigation.getParam('item'));
-    console.log(this.state.partner);
-    console.log(this.state.location);
-    console.log(this.state.rooms);
+    // console.log(this.props.navigation.getParam('item'));
+    // console.log(this.state.partner);
+    // console.log(this.state.location);
+    // console.log(this.state.rooms);
   };
 
   render() {

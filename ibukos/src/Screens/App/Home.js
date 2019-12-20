@@ -41,7 +41,7 @@ class Home extends React.Component {
         );
       } else {
         this.setState({regions: this.props.regions.Regions.data});
-        console.log(this.state.regions);
+        //console.log(this.state.regions);
       }
     });
 
@@ -55,7 +55,7 @@ class Home extends React.Component {
         );
       } else {
         this.setState({rooms: this.props.rooms.Rooms});
-        console.log(this.props.rooms.Rooms);
+        //console.log(this.props.rooms.Rooms);
       }
     });
   };
@@ -70,7 +70,7 @@ class Home extends React.Component {
 
   render() {
     const {regions, rooms} = this.state;
-    console.log('ini rooms, nda: ', rooms);
+    //console.log('ini rooms, nda: ', rooms);
     return (
       <View style={styles.content}>
         <StatusBar translucent backgroundColor="#1AB0D3" />
@@ -79,7 +79,7 @@ class Home extends React.Component {
           <ImageBackground source={header} style={styles.headerImage} />
           <View style={styles.search}>
             <TextInput
-              placeholder="Find Location"
+              placeholder="Mau ngekos dimana?"
               onChangeText={text => this.setState({search: text})}
               style={styles.searchInput}
             />
@@ -111,7 +111,9 @@ class Home extends React.Component {
                       <View style={styles.item}>
                         <Thumbnail
                           square
-                          source={{uri: `${res.image}`}}
+                          source={{
+                            uri: `${res.image}`,
+                          }}
                           style={styles.thumbnail}
                         />
                         <Text style={styles.placeText}>{res.name}</Text>
@@ -120,50 +122,109 @@ class Home extends React.Component {
                   );
                 })
               ) : (
-                <Text>Loading...</Text>
+                <Text>it may take one more times...</Text>
               )}
             </ScrollView>
           </View>
           <View style={styles.body}>
             <View style={styles.populerWrapper}>
-              <Text style={styles.title}>Recommendation Kos</Text>
+              <Text style={styles.title}>Kosan Terpopuler</Text>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
                 {rooms ? (
                   rooms.map((res, index) => {
-                    return (
-                      <View style={styles.carousel} key={index}>
-                        <TouchableOpacity
-                          activeOpacity={0.8}
-                          onPress={() =>
-                            this.props.navigation.navigate('KosDetail', {
-                              item: res,
-                            })
-                          }>
-                          <View style={styles.headerCard}>
-                            <Image
-                              source={{uri: `${res.image.split(',')[0]}`}}
-                              style={styles.imgCard}
-                            />
-                            <View style={styles.genderWrapper}>
-                              <Text style={styles.genderText}>
-                                {res.gender}
+                    if (index < 3) {
+                      return (
+                        <View style={styles.carousel} key={index}>
+                          <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() =>
+                              this.props.navigation.navigate('KosDetail', {
+                                item: res,
+                              })
+                            }>
+                            <View style={styles.headerCard}>
+                              <Image
+                                source={{uri: `${res.image.split(',')[0]}`}}
+                                style={styles.imgCard}
+                              />
+                              <View style={styles.genderWrapper}>
+                                <Text style={styles.genderText}>
+                                  {res.gender}
+                                </Text>
+                              </View>
+                            </View>
+                            <View style={styles.bodyCard}>
+                              <Text style={styles.name}>
+                                {res.name.slice(0, 13)}
+                              </Text>
+                              <Text style={styles.area}>{res.room_area}</Text>
+                              <Text style={styles.price}>
+                                Rp {res.price}/month
                               </Text>
                             </View>
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    }
+                  })
+                ) : (
+                  <View>
+                    <Text>Loading...</Text>
+                  </View>
+                )}
+              </ScrollView>
+            </View>
+
+            <View style={styles.TersediaWrapper}>
+              <Text style={styles.title}>Kosan tersedia di sekitarmu</Text>
+              <ScrollView
+                horizontal={false}
+                showsHorizontalScrollIndicator={false}>
+                {rooms ? (
+                  rooms.map((res, index) => {
+                    if (index < 20) {
+                      return (
+                        <View style={styles.carousel} key={index}>
+                          <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() =>
+                              this.props.navigation.navigate('KosDetail', {
+                                item: res,
+                              })
+                            }>
+                            <View style={styles.headerCard}>
+                              <Image
+                                source={{uri: `${res.image.split(',')[0]}`}}
+                                style={styles.imgCard}
+                              />
+                              <View style={styles.genderWrapper}>
+                                <Text style={styles.genderText}>
+                                  {res.gender}
+                                </Text>
+                              </View>
+                            </View>
+                            <View style={styles.bodyCard}>
+                              <Text style={styles.name}>
+                                {res.name.slice(0, 13)}
+                              </Text>
+                              <Text style={styles.area}>{res.room_area}</Text>
+                              <Text style={styles.price}>
+                                Rp {res.price}/month
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                          <View style={styles.fasilitas}>
+                            <Text>Fasilitas:</Text>
+                            <Text>- dilengkapi AC</Text>
+                            <Text>- Kamar mandi</Text>
+                            <Text>- Ada dapur</Text>
+                            <Text>- Free Wifi</Text>
                           </View>
-                          <View style={styles.bodyCard}>
-                            <Text style={styles.name}>
-                              {res.name.slice(0, 13)}
-                            </Text>
-                            <Text style={styles.area}>{res.room_area}</Text>
-                            <Text style={styles.price}>
-                              Rp {res.price}/month
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                    );
+                        </View>
+                      );
+                    }
                   })
                 ) : (
                   <View>
@@ -211,18 +272,18 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     height: 50,
-    borderRadius: 10,
+    borderRadius: 20,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
-    paddingVertical: 5,
+    paddingVertical: 1,
     paddingHorizontal: 15,
-    paddingLeft: 40,
+    paddingLeft: 60,
     backgroundColor: '#FFF',
   },
   iconSearch: {
     position: 'absolute',
     top: 16,
-    left: 14,
+    left: 30,
     fontSize: 17,
     color: 'gray',
   },
@@ -244,6 +305,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 10,
+    backgroundColor: '#2ecc71',
   },
   placeText: {
     color: '#4D4D4D',
@@ -256,8 +318,13 @@ const styles = StyleSheet.create({
     margin: 15,
     height: 240,
   },
+  TersediaWrapper: {
+    margin: 15,
+    height: '100%',
+  },
   title: {
     fontSize: 17,
+    fontWeight: 'bold',
   },
   carousel: {
     marginRight: 15,
@@ -312,6 +379,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 13,
     fontWeight: 'bold',
+  },
+  fasilitas: {
+    left: 200,
+    marginTop: -150,
   },
 });
 

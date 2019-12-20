@@ -50,7 +50,7 @@ class EditProfileUser extends Component {
 
   handleSave = async () => {
     const {formData, typeImage} = this.state;
-    console.log('FORM DATA', formData);
+    //console.log('FORM DATA', formData);
     let formDataUser = new FormData();
     formDataUser.append('fullname', formData.fullname);
     formDataUser.append('username', formData.username);

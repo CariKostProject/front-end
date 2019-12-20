@@ -11,7 +11,7 @@ export default class ProductList extends Component {
     };
   }
   componentDidMount = async () => {
-    console.log(this.state.rooms);
+    // console.log(this.state.rooms);
   };
 
   render() {

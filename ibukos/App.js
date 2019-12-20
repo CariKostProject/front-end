@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   onReceived(notification) {
-    console.log('Notification received: ', notification);
+    //console.log('Notification received: ', notification);
     const notif = new audio('notification.mp3', audio.MAIN_BUNDLE, err => {
       if (err) {
         return;
@@ -38,10 +38,10 @@ class App extends Component {
   }
 
   onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
+    // console.log('Message: ', openResult.notification.payload.body);
+    // console.log('Data: ', openResult.notification.payload.additionalData);
+    // console.log('isActive: ', openResult.notification.isAppInFocus);
+    // console.log('openResult: ', openResult);
   }
 
   onIds(device) {

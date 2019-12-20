@@ -45,7 +45,7 @@ class Chat extends React.Component {
         this.setState({chat: this.state.chat});
       });
     await this.props.dispatch(getPartners());
-    console.log(this.props.partner.Partner.data);
+    // console.log(this.props.partner.Partner.data);
     this.setState({
       isLoading: false,
       partner: this.props.partner.Partner.data,
@@ -103,7 +103,7 @@ class Chat extends React.Component {
                   messages from the partner will appear here
                 </Text>
                 <Image
-                  source={require('../../Assets/chat.gif')}
+                  source={require('../../Assets/chat.png')}
                   style={styles.gif}
                 />
               </View>

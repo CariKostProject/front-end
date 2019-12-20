@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  ToastAndroid,
 } from 'react-native';
 import {Icon} from 'native-base';
 import axios from 'axios';
@@ -20,7 +21,7 @@ import mandiri from '../../../Assets/mandiri.png';
 class Payment extends Component {
   state = {
     Booking: [],
-    Payment: [],
+    // Payment: [],
   };
 
   dataBank = [
@@ -37,25 +38,36 @@ class Payment extends Component {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {
+            ToastAndroid.show(
+              `it's canceled`,
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER,
+            );
+          },
           style: 'cancel',
         },
         {
           text: 'OK',
           onPress: async () => {
             await this.CreateBooking();
-            await this.CreatePayment(bank);
-            this.CreateBooking()
-              .then(result =>
-                this.props.navigation.navigate('ConfirmPayment', {
-                  bankLogo: image,
-                  idPayment: this.state.Payment.data.insertId,
-                  MyBank: this.state.Payment.xendit.available_banks,
-                  bankCode: bank,
-                  Amount: this.state.Payment.xendit.amount,
-                }),
-              )
-              .catch(err => console.log(err));
+            ToastAndroid.show(
+              `it's Success`,
+              ToastAndroid.LONG,
+              ToastAndroid.CENTER,
+            );
+            // await this.CreatePayment(bank);
+            // this.CreateBooking()
+            //   .then(result =>
+            //     this.props.navigation.navigate('ConfirmPayment', {
+            //       bankLogo: image,
+            //       idPayment: this.state.Payment.data.insertId,
+            //       MyBank: this.state.Payment.xendit.available_banks,
+            //       bankCode: bank,
+            //       Amount: this.state.Payment.xendit.amount,
+            //     }),
+            //   )
+            //   .catch(err => console.log(err));
           },
         },
       ],
@@ -71,30 +83,35 @@ class Payment extends Component {
         room_id: this.props.navigation.getParam('IdRoom'),
         status: 'Pending',
         price: this.props.navigation.getParam('Amount'),
-        startDate: '1999-12-20',
-        endDate: '2000-01-20',
+        startDate: '2019-12-20',
+        endDate: '2020-01-20',
       })
       .then(result => {
         this.setState({Booking: result});
+        ToastAndroid.show(
+          `it's Success`,
+          ToastAndroid.LONG,
+          ToastAndroid.CENTER,
+        );
       })
-      .catch(err => console.warn(err));
+      .catch(err => console.log(err));
   };
 
-  CreatePayment = async bank => {
-    await axios
-      .post('https://ibukost.herokuapp.com/payment', {
-        bookid: '30',
-        paid_amount: '3000001',
-        invoice_id: 'test',
-        bank_code: bank,
-        email: 'idn@gmail.com',
-        id_user: '12',
-      })
-      .then(Datas => {
-        this.setState({Payment: Datas.data});
-      })
-      .catch(err => console.warn(err));
-  };
+  // CreatePayment = async bank => {
+  //   await axios
+  //     .post('https://ibukost.herokuapp.com/payment', {
+  //       bookid: '30',
+  //       paid_amount: '3000001',
+  //       invoice_id: 'test',
+  //       bank_code: bank,
+  //       email: 'idn@gmail.com',
+  //       id_user: '12',
+  //     })
+  //     .then(Datas => {
+  //       this.setState({Payment: Datas.data});
+  //     })
+  //     .catch(err => console.warn(err));
+  // };
 
   componentDidMount() {}
 

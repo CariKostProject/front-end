@@ -33,7 +33,7 @@ class Profile extends React.Component {
         );
       } else {
         this.setState({user: res.action.payload.data.data[0]});
-        console.log(this.state.user);
+        //console.log(this.state.user);
       }
     });
   };
